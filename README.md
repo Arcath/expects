@@ -1,6 +1,6 @@
 # Expects
 
-TODO: Write a gem description
+A DSL for defining input expectations for methods
 
 ## Installation
 
@@ -18,7 +18,17 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Include `Expects` in your class and then call it in your methods eg:
+
+```ruby
+class YourClass
+  include Expects
+  
+  def initialize(name)
+    expects name, String
+  end
+end
+```
 
 ## Contributing
 
