@@ -8,13 +8,15 @@ describe Expects do
       def initialize(message)
         expects message, String
       end
+      
+      def a_method
+        true
+      end
     end
   end
   
   let(:array_class) do
-    Class.new do
-      include Expects
-      
+    Class.new(test_class) do 
       def initialize(message)
         expects message, [String, Fixnum]
       end
@@ -30,6 +32,8 @@ describe Expects do
   end
   
   it "should take an array" do
-    array_class.new(1234)
+    lambda { array_class.new(1234) }.should_not raise_exception
+    lambda { array_class.new(["foo"]) }.should raise_exception
+    array_class.new("This").a_method.should be_true
   end
 end
