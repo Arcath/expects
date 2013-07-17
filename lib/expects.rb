@@ -6,7 +6,8 @@ require 'expects/error'
 module Expects
   private
   
-  def expects(subject, object)
-    raise UnexpectedInput.new("Expected #{object.inspect}", subject, object) unless subject.is_a? object
+  def expects(subject, objects)
+    objects = [objects] unless objects.is_a? Array
+    raise UnexpectedInput.new("Expected #{objects.join(" or ")}", subject, objects) unless objects.include? subject.class
   end
 end
