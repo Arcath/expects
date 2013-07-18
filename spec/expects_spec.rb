@@ -9,6 +9,10 @@ describe Expects do
         expects message, String
       end
       
+      def reject_test(input)
+        reject input, String
+      end
+      
       def a_method
         true
       end
@@ -35,5 +39,22 @@ describe Expects do
     lambda { array_class.new(1234) }.should_not raise_exception
     lambda { array_class.new(["foo"]) }.should raise_exception
     array_class.new("This").a_method.should be_true
+  end
+  
+  it "should reject items aswell" do
+    begin
+      test_class.new("bar").reject_test("foo")
+    rescue UnexpectedInput => e
+      e.subject.should eq "foo"
+      e.expected.should eq [String]
+    end
+  end
+  
+  it "should have made expects a private method" do
+    begin
+      test_class.new("bar").expects
+    rescue => e
+      e.message.should =~ /private method/
+    end
   end
 end
