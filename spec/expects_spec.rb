@@ -5,6 +5,10 @@ describe Expects do
     Class.new do
       include Expects
       
+      def self.class_method(input)
+        expects input, Fixnum
+      end
+      
       def initialize(message)
         expects message, String
       end
@@ -39,6 +43,15 @@ describe Expects do
     lambda { array_class.new(1234) }.should_not raise_exception
     lambda { array_class.new(["foo"]) }.should raise_exception
     array_class.new("This").a_method.should be_true
+  end
+  
+  it "should be usable in class methods" do
+    begin
+      test_class.class_method("foo")
+    rescue UnexpectedInput => e
+      e.subject.should eq "foo"
+      e.expected.should eq [Fixnum]
+    end
   end
   
   it "should reject items aswell" do

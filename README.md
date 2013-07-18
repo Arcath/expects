@@ -29,6 +29,25 @@ class YourClass
   end
 end
 ```
+You can pass an array instead of one class to accept multiple types e.g.
+
+```ruby
+expects number, [Fixnum, Float]
+```
+
+If you try to pass anything other than a string to YourClass.new expects will raise an exception which you can catch like so:
+
+```ruby
+begin
+  YourClass.new(1234)
+rescue UnexpectedInput => e
+  e.message # Expected 1234 to be String
+  e.subject # 1234
+  e.expected # [String]
+end
+```
+
+All exceptions thrown by expects are instances of `UnexpectedInput`
 
 ## Contributing
 
