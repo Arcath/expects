@@ -1,18 +1,19 @@
 # Version Number
 require 'expects/version'
-# Error
+# Classes
 require 'expects/error'
+require 'expects/handler'
 
 module Expects
   module ClassMethods
     def expects(subject, objects)
       objects = [objects] unless objects.is_a? Array
-      raise UnexpectedInput.new(subject, objects) unless objects.include? subject.class
+      Expects::Handler.new(subject, objects).accept!
     end
     
     def reject(subject, objects)
       objects = [objects] unless objects.is_a? Array
-      raise UnexpectedInput.new(subject, objects) if objects.include? subject.class
+      Expects::Handler.new(subject, objects).reject!
     end
   end
   
