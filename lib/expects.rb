@@ -7,13 +7,23 @@ require 'expects/handler'
 module Expects
   module ClassMethods
     def expects(subject, objects)
-      objects = [objects] unless objects.is_a? Array
-      Expects::Handler.new(subject, objects).accept!
+      if objects.is_a? Regexp
+        handler = Expects::Handlers::Regex.new(subject, objects)
+      else
+        objects = [objects] if objects.is_a? Class
+        handler = Expects::Handler.new(subject, objects)
+      end
+      handler.accept!
     end
     
     def reject(subject, objects)
-      objects = [objects] unless objects.is_a? Array
-      Expects::Handler.new(subject, objects).reject!
+      if objects.is_a? Regexp
+        handler = Expects::Handlers::Regex.new(subject, objects)
+      else
+        objects = [objects] if objects.is_a? Class
+        handler = Expects::Handler.new(subject, objects)
+      end
+      handler.reject!
     end
   end
   
@@ -31,3 +41,6 @@ module Expects
   
   private :expects, :reject
 end
+
+# Handlers
+require 'expects/handlers/regex'
