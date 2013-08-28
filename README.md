@@ -2,6 +2,8 @@
 
 A DSL for defining input expectations for methods
 
+[![Coverage Status](https://coveralls.io/repos/Arcath/expects/badge.png?branch=master)](https://coveralls.io/r/Arcath/expects?branch=master) | [![Build Status](https://travis-ci.org/Arcath/expects.png?branch=master)](https://travis-ci.org/Arcath/expects)
+
 ## Installation
 
 Add this line to your application's Gemfile:
