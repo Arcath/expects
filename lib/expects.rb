@@ -10,8 +10,7 @@ module Expects
       if objects.is_a? Regexp
         handler = Expects::Handlers::Regex.new(subject, objects)
       else
-        objects = [objects] if objects.is_a? Class
-        handler = Expects::Handler.new(subject, objects)
+        handler = Expects::Handler.new(subject, [*objects])
       end
       handler.accept!
     end
@@ -20,8 +19,7 @@ module Expects
       if objects.is_a? Regexp
         handler = Expects::Handlers::Regex.new(subject, objects)
       else
-        objects = [objects] if objects.is_a? Class
-        handler = Expects::Handler.new(subject, objects)
+        handler = Expects::Handler.new(subject, [*objects])
       end
       handler.reject!
     end
