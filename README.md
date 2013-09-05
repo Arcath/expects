@@ -1,8 +1,8 @@
 # Expects
 
-A DSL for defining input expectations for methods
+A DSL for validating input for methods
 
-[![Coverage Status](https://coveralls.io/repos/Arcath/expects/badge.png?branch=master)](https://coveralls.io/r/Arcath/expects?branch=master) | [![Build Status](https://travis-ci.org/Arcath/expects.png?branch=master)](https://travis-ci.org/Arcath/expects)
+[![Coverage Status](https://coveralls.io/repos/Arcath/expects/badge.png?branch=master)](https://coveralls.io/r/Arcath/expects?branch=master) [![Build Status](https://travis-ci.org/Arcath/expects.png?branch=master)](https://travis-ci.org/Arcath/expects) [![Code Climate](https://codeclimate.com/github/Arcath/expects.png)](https://codeclimate.com/github/Arcath/expects)
 
 ## Installation
 
