@@ -20,6 +20,8 @@ module Expects
     def reject(subject, objects)
       if objects.is_a? Regexp
         handler = Expects::Handlers::Regex.new(subject, objects)
+      elsif objects.is_a? Proc
+        handler = Expects::Handlers::Proc.new(subject, objects)
       else
         handler = Expects::Handler.new(subject, [*objects])
       end
