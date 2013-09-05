@@ -1,15 +1,12 @@
 class UnexpectedInput < StandardError
   attr_reader :subject, :expected
   
-  def initialize(subject = nil, expected = nil)
-    @subject, @expected = subject, expected
+  def initialize(handler)
+    @handler = handler
+    @subject, @expected = handler.subject, handler.objects
   end
   
   def message
-    @message ||= build_message
-  end
-  
-  def build_message
-    "Expected #{@subject.inspect} to be #{expected.join(", ")}"
+    @message ||= @handler.build_message
   end
 end

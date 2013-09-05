@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe UnexpectedInput do
   let(:error) do
-    UnexpectedInput.new(1234, [String])
+    UnexpectedInput.new(Expects::Handler.new(1234, [String]))
   end
   
   let(:test_class) do

@@ -1,20 +1,19 @@
 module Expects
   module Handlers
-    class Regex < Expects::Handler
+    class Proc < Expects::Handler
       include Expects
       
       def initialize(subject, objects)
-        expects subject, String
-        expects objects, Regexp
+        expects objects, ::Proc
         super
       end
       
       def valid?
-        @subject.match(@objects)
+        @objects.call(@subject)
       end
       
       def build_message
-        "Expected #{@subject.inspect} match \"#{@objects.inspect}\""
+        "Expected #{@subject.inspect} to get a true from the proc"
       end
     end
   end
