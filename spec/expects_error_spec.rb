@@ -12,6 +12,10 @@ describe UnexpectedInput do
       def initialize(message)
         expects message, String
       end
+      
+      def self.test_message(message)
+        expects message, String, "Please input a String"
+      end
     end
   end
   
@@ -32,6 +36,14 @@ describe UnexpectedInput do
       e.message.should eq error.message
       e.subject.should eq error.subject
       e.expected.should eq error.expected
+    end
+  end
+  
+  it "should let you change the error message" do
+    begin
+      test_class.test_message(1234)
+    rescue UnexpectedInput => e
+      e.message.should eq "Please input a String"
     end
   end
 end

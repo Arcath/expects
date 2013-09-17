@@ -3,7 +3,7 @@ module Expects
     class Regex < Expects::Handler
       include Expects
       
-      def initialize(subject, objects)
+      def initialize(subject, objects, message = nil)
         expects subject, String
         expects objects, Regexp
         super
@@ -14,7 +14,8 @@ module Expects
       end
       
       def build_message
-        "Expected #{@subject.inspect} match \"#{@objects.inspect}\""
+        return @message if @message
+        return "Expected #{@subject.inspect} match \"#{@objects.inspect}\""
       end
     end
   end

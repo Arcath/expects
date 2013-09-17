@@ -2,9 +2,10 @@ module Expects
   class Handler
     attr_reader :subject, :objects
     
-    def initialize(subject, objects)
+    def initialize(subject, objects, message = nil)
       @subject = subject
       @objects = objects
+      @message = message
     end
     
     def valid?
@@ -20,7 +21,8 @@ module Expects
     end
     
     def build_message
-      "Expected #{@subject.inspect} to be #{@objects.join(", ")}"
+      return @message if @message
+      return "Expected #{@subject.inspect} to be #{@objects.join(", ")}"
     end
   end
 end

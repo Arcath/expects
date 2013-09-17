@@ -3,7 +3,7 @@ module Expects
     class Proc < Expects::Handler
       include Expects
       
-      def initialize(subject, objects)
+      def initialize(subject, objects, message = nil)
         expects objects, ::Proc
         super
       end
@@ -13,7 +13,8 @@ module Expects
       end
       
       def build_message
-        "Expected #{@subject.inspect} to get a true from the proc"
+        return @message if @message
+        return "Expected #{@subject.inspect} to get a true from the proc"
       end
     end
   end
