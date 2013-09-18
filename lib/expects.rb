@@ -7,6 +7,16 @@ require 'expects/handler'
 module Expects
   module ClassMethods
     def expects(subject, objects, message = nil)
+      handler = build_expects_handler(subject, objects, message)
+      handler.accept!
+    end
+    
+    def reject(subject, objects, message = nil)
+      handler = build_expects_handler(subject, objects, message)
+      handler.reject!
+    end
+    
+    def build_expects_handler(subject, objects, message = nil)
       if objects.is_a? Regexp
         handler = Expects::Handlers::Regex.new(subject, objects, message)
       elsif objects.is_a? Proc
@@ -14,18 +24,7 @@ module Expects
       else
         handler = Expects::Handler.new(subject, [*objects], message)
       end
-      handler.accept!
-    end
-    
-    def reject(subject, objects, message = nil)
-      if objects.is_a? Regexp
-        handler = Expects::Handlers::Regex.new(subject, objects)
-      elsif objects.is_a? Proc
-        handler = Expects::Handlers::Proc.new(subject, objects)
-      else
-        handler = Expects::Handler.new(subject, [*objects])
-      end
-      handler.reject!
+      return handler
     end
   end
   
