@@ -28,6 +28,11 @@ describe Expects::Handlers::Regex do
   
   it "should raise an exception if the subject doesn't match the supplied pattern" do
     lambda { user.new("foo", "foobar.com") }.should raise_exception
+    begin
+      user.new("foo", "foobar.com")
+    rescue UnexpectedInput => e
+      e.message.should eq "Expected \"foobar.com\" match \"/^.*\\\@.*$/\""
+    end
   end
   
   it "should support reject aswell" do

@@ -5,7 +5,7 @@ module Expects
     def initialize(subject, objects, message = nil)
       @subject = subject
       @objects = objects
-      @message = message
+      @message ||= message
     end
     
     def valid?

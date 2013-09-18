@@ -34,6 +34,11 @@ describe Expects::Handlers::Proc do
   
   it "should raise an error if the proc returns false" do
     lambda { test_class.new(fail_array) }.should raise_exception UnexpectedInput
+    begin
+      test_class.new(fail_array)
+    rescue UnexpectedInput => e
+      e.message.should eq "Expected [1, 2] to get a true from the proc"
+    end
   end
   
   it "should support rejection" do

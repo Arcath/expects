@@ -5,16 +5,12 @@ module Expects
       
       def initialize(subject, objects, message = nil)
         expects objects, ::Proc
+        @message = (message || "Expected #{subject.inspect} to get a true from the proc")
         super
       end
       
       def valid?
         @objects.call(@subject)
-      end
-      
-      def build_message
-        return @message if @message
-        return "Expected #{@subject.inspect} to get a true from the proc"
       end
     end
   end
